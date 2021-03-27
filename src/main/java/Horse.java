@@ -1,5 +1,5 @@
 public class Horse {
-    private PositionConverter converter;// = new PositionConverter();
+    private PositionConverter converter;
     private char letterPosition;
     private byte indexPosition;
 

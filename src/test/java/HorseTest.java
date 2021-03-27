@@ -20,8 +20,8 @@ public class HorseTest {
 
     @Before
     public void setup() {
-        //horse = new Horse(converterMock, 'A', (byte) 1);
         //converterMock = Mockito.mock(PositionConverter.class);
+        //horse = new Horse(converterMock, 'A', (byte) 1);
 
         horse.setPosition('A', (byte) 1);
         when(converterMock.convertPositionIndex((byte) 1)).thenReturn((byte) 7);
@@ -40,10 +40,10 @@ public class HorseTest {
 
     @Test
     public void isPossibleToMove_nominal_impossible() {
-        boolean actual = horse.isPossibleToMove('D', (byte) 8);
+        when(converterMock.convertPositionIndex((byte) 8)).thenReturn((byte) 0);
+        when(converterMock.convertPositionLetter('D')).thenReturn((byte) 68);
 
-        lenient().when(converterMock.convertPositionIndex((byte) 8)).thenReturn((byte) 0);
-        lenient().when(converterMock.convertPositionLetter('D')).thenReturn((byte) 68);
+        boolean actual = horse.isPossibleToMove('D', (byte) 8);
 
         Assert.assertFalse(actual);
     }
