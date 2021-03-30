@@ -6,8 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class HorseTest {
@@ -35,6 +34,7 @@ public class HorseTest {
 
         boolean actual = horse.isPossibleToMove('C', (byte) 2);
 
+        verifyMock();
         Assert.assertTrue(actual);
     }
 
@@ -45,7 +45,14 @@ public class HorseTest {
 
         boolean actual = horse.isPossibleToMove('D', (byte) 8);
 
+        verifyMock();
         Assert.assertFalse(actual);
+    }
+
+    private void verifyMock() {
+        verify(converterMock, times(2)).convertPositionLetter(anyChar());
+        verify(converterMock, times(2)).convertPositionIndex(anyByte());
+        verifyNoMoreInteractions(converterMock);
     }
 
 }
